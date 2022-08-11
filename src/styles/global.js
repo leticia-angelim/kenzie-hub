@@ -30,6 +30,9 @@ export default createGlobalStyle`
   }
 
   body, html{
+    display: flex;
+    justify-content: center;
+
     width: 100vw;
     height: 100vh;
   }
@@ -38,6 +41,8 @@ export default createGlobalStyle`
     background: var(--gray-4);
     color: var(--gray-0);
     -webkit-font-smoothing: antialiased;
+    
+    overflow-x: hidden;
   }
 
   body, input, button, textarea, select, option, a {

@@ -6,9 +6,8 @@ export const FormContainer = styled.div`
   gap: 3rem;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
 
-  padding: 4rem;
+  padding: 4rem 0;
 `;
 
 export const Form = styled.form`
@@ -17,7 +16,6 @@ export const Form = styled.form`
   flex-direction: column;
 
   width: 100%;
-  max-width: 369px;
   padding: 4rem 2rem;
 
   border-radius: 4px;
@@ -49,6 +47,10 @@ export const Form = styled.form`
     text-align: center;
 
     color: var(--gray-1);
+  }
+
+  @media (min-width: 450px) {
+    width: 369px;
   }
 `;
 
@@ -89,6 +91,10 @@ export const InputBox = styled.div`
 
   input:focus::placeholder {
     color: var(--gray-0);
+  }
+
+  input:disabled {
+    cursor: not-allowed;
   }
 
   svg {

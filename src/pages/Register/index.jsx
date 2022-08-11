@@ -1,18 +1,24 @@
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { useContext } from "react";
+
 import { schema } from "../../validators/registerUser";
+import { UserContext } from "../../contexts/UserContext";
 
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-
-import api from "../../services/api";
-import Logo from "../../components/Logo";
 import ContainerMotion from "../../components/Animation";
+import Logo from "../../components/Logo";
 
 import { Header, LinkButton } from "./styles";
-import { FormContainer, Form, InputBox, PinkButton } from "../../styles/form";
+import {
+  FormContainer,
+  Form,
+  InputBox,
+  PinkButton,
+} from "../../components/Form";
 
 const Register = () => {
+  const { registerUser } = useContext(UserContext);
+
   const {
     register,
     handleSubmit,
@@ -21,27 +27,14 @@ const Register = () => {
     resolver: yupResolver(schema),
   });
 
-  const navigate = useNavigate();
-
-  const registerUser = (data) => {
-    api
-      .post("/users", data)
-      .then(() => {
-        toast.success("Conta criada com sucesso!");
-
-        setTimeout(() => {
-          navigate("/login");
-        }, 3000);
-      })
-      .catch(() => toast.error("Ops! Email já cadastrado"));
-  };
-
   return (
     <ContainerMotion>
       <FormContainer>
         <Header>
           <Logo />
-          <LinkButton to={"/login"}>Voltar</LinkButton>
+          <LinkButton to={"/login"} replace>
+            Voltar
+          </LinkButton>
         </Header>
 
         <Form onSubmit={handleSubmit(registerUser)}>

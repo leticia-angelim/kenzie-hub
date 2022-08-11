@@ -1,22 +1,19 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { useState } from "react";
 
-import Login from "../pages/Login";
-import Register from "../pages/Register";
+import ProtectedRoutes from "../components/ProtectedRoutes";
 import Dashboard from "../pages/Dashboard";
+import Register from "../pages/Register";
+import Login from "../pages/Login";
 
 const MyRoutes = () => {
-  const [user, setUser] = useState([]);
-
   return (
     <Routes>
-      <Route path="/login" element={<Login setUser={setUser} />} />
-      <Route path="/register" element={<Register />} />
-      <Route
-        path="/dashboard"
-        element={<Dashboard user={user} setUser={setUser} />}
-      />
       <Route path="*" element={<Navigate replace to={"/login"} />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route element={<ProtectedRoutes />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Route>
     </Routes>
   );
 };
