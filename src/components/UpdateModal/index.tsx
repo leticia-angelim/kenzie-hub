@@ -1,13 +1,19 @@
-import { TechContext } from "../../contexts/UserContext";
-import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
+
+import { ITech, useTechContext } from "../../contexts/TechContext";
 
 import { InputBox } from "../Form";
 import { ModalBox, ModalContainer, ModalTitle } from "../Modal/styles";
 
-const UpdateModal = ({ title, status }) => {
-  const { updateTech, deleteTech, setUpdateModal } = useContext(TechContext);
-  const { register, handleSubmit } = useForm();
+interface IUpdateModalProps {
+  title: string;
+  status: string;
+}
+
+const UpdateModal = ({ title, status }: IUpdateModalProps) => {
+  const { updateTech, deleteTech, setUpdateModal } = useTechContext();
+  const { register, handleSubmit } = useForm<ITech>();
 
   const [disabledButton, setDisabledButton] = useState(true);
 

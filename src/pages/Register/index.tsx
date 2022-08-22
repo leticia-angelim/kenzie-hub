@@ -1,14 +1,12 @@
-import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { useContext } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-import { schema } from "../../validators/registerUser";
-import { UserContext } from "../../contexts/UserContext";
-
-import ContainerMotion from "../../components/Animation";
 import Logo from "../../components/Logo";
+import { schema } from "../../validators/registerUser";
+import { IUser, useUserContext } from "../../contexts/UserContext";
 
 import { Header, LinkButton } from "./styles";
+import ContainerMotion from "../../components/Animation";
 import {
   FormContainer,
   Form,
@@ -17,13 +15,13 @@ import {
 } from "../../components/Form";
 
 const Register = () => {
-  const { registerUser } = useContext(UserContext);
+  const { registerUser } = useUserContext();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IUser>({
     resolver: yupResolver(schema),
   });
 

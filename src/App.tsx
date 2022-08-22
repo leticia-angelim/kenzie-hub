@@ -1,9 +1,10 @@
-import Providers from "./contexts/UserContext";
-import Global from "./styles/global";
-import Routes from "./routes";
-
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
+
+import Routes from "./routes";
+import Providers from "./contexts";
+
+import Global from "./styles/global";
 
 const App = () => {
   return (

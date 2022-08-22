@@ -2,14 +2,13 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { useContext } from "react";
-import { TechContext } from "../../contexts/UserContext";
+import { ITech, useTechContext } from "../../contexts/TechContext";
 
 import { InputBox, PinkButton } from "../Form";
 import { ModalBox, ModalContainer, ModalTitle } from "../Modal/styles";
 
 const AddModal = () => {
-  const { createTech, setAddModal } = useContext(TechContext);
+  const { createTech, setAddModal } = useTechContext();
 
   const schema = yup.object({
     title: yup.string().required("Campo obrigatório"),
@@ -19,7 +18,7 @@ const AddModal = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<ITech>({
     resolver: yupResolver(schema),
   });
 

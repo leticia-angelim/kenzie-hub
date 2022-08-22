@@ -1,14 +1,13 @@
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
-
 import { MdVisibilityOff, MdVisibility } from "react-icons/md";
-import { UserContext } from "../../contexts/UserContext";
 
 import Logo from "../../components/Logo";
-import ContainerMotion from "../../components/Animation";
+import { IUser, useUserContext } from "../../contexts/UserContext";
 
+import ContainerMotion from "../../components/Animation";
 import {
   FormContainer,
   Form,
@@ -18,7 +17,7 @@ import {
 } from "../../components/Form";
 
 const Login = () => {
-  const { loginUser } = useContext(UserContext);
+  const { loginUser } = useUserContext();
   const [showPassword, setShowPassword] = useState(false);
 
   const schema = yup.object({
@@ -30,7 +29,7 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IUser>({
     resolver: yupResolver(schema),
   });
 

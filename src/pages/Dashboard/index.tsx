@@ -1,18 +1,19 @@
-import { TechContext, UserContext } from "../../contexts/UserContext";
-import { useContext, useState } from "react";
+import { useState } from "react";
+import { useTechContext } from "../../contexts/TechContext";
+import { useUserContext } from "../../contexts/UserContext";
 
 import Logo from "../../components/Logo";
 import AddModal from "../../components/AddModal";
 import UpdateModal from "../../components/UpdateModal";
-import ContainerMotion from "../../components/Animation";
 
 import { LinkButton } from "../Register/styles";
+import ContainerMotion from "../../components/Animation";
 import { Container, Header, Line, Line2, Main, Navbar } from "./styles";
 
 const Dashboard = () => {
-  const { user, setUser, techs } = useContext(UserContext);
+  const { user, setUser, techs } = useUserContext();
   const { addModal, setAddModal, updateModal, setUpdateModal, setTechId } =
-    useContext(TechContext);
+    useTechContext();
 
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("");
@@ -33,8 +34,8 @@ const Dashboard = () => {
         </Navbar>
         <Line />
         <Header>
-          <h2>Olá, {user.name}</h2>
-          <span>{user.course_module}</span>
+          <h2>Olá, {user?.name}</h2>
+          <span>{user?.course_module}</span>
         </Header>
         <Line2 />
         <Main>
@@ -43,7 +44,7 @@ const Dashboard = () => {
             <button onClick={() => setAddModal(true)}>+</button>
           </div>
           <div className="tech-list">
-            {techs.map((tech, index) => (
+            {techs?.map((tech, index) => (
               <div
                 key={index}
                 onClick={() => {

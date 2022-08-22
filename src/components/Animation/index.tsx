@@ -1,6 +1,11 @@
 import { motion } from "framer-motion";
+import { ReactNode } from "react";
 
-const ContainerMotion = ({ children }) => {
+interface IContainerMotionProps {
+  children: ReactNode;
+}
+
+const ContainerMotion = ({ children }: IContainerMotionProps) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
