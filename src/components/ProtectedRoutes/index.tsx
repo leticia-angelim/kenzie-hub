@@ -7,8 +7,10 @@ import ContainerMotion from "../Animation";
 import { Loading } from "../../pages/Dashboard/styles";
 
 const ProtectedRoutes = () => {
-  const { user, loading } = useUserContext();
+  const { loading } = useUserContext();
   const location = useLocation();
+
+  const token = localStorage.getItem("@kenzieHub:token");
 
   if (loading) {
     return (
@@ -21,7 +23,7 @@ const ProtectedRoutes = () => {
     );
   }
 
-  return user ? (
+  return token ? (
     <Outlet />
   ) : (
     <Navigate to={"/login"} replace state={{ from: location }} />
